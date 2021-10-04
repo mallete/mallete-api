@@ -3,10 +3,6 @@ const mongoose = require('mongoose')
 // Schema
 
 const userSchema = new mongoose.Schema({
-  userId: {
-    type: 'ObjectId',
-    ref: ''
-  },
   firstName: {
     type: String,
     minLength: 2,
