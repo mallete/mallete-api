@@ -1,20 +1,24 @@
 const mongoose = require('mongoose')
 
 // Schema
-
+/*
+    agreementDate: '28-06-2021',
+    publicationDate: '29-06-2021',
+    room: 'V',
+    record: '1273/2021',
+    plaintiff: 'FARMACIAS DE SIMILARES SA DE CV',
+    defendant: 'H. AYUNTAMIENTO DE GUADALAJARA, TESORERIA MUNICIPAL, JEFE DEL DEPARTAMENTO DE CALIFICACION',
+    thirdParty: '',
+    rawContent: 'SE ABRE PERIODO DE ALEGATOS.',
+    viewMoreUrl: '',
+    secretary: 'LIC. MARIA ISABEL DE ANDA MUÑOZ'
+ */
 const trialSchema = new mongoose.Schema({
-  userId: {
-    type: 'ObjectId',
-    ref: '',
+  record: {
+    type: String,
     required: true
   },
-  numFile: {
-    type: Number,
-    min: 0,
-    max: 20,
-    required: true
-  },
-  actor: {
+  plaintiff: {
     type: String,
     minLength: 2,
     maxLength: 100,
@@ -26,15 +30,19 @@ const trialSchema = new mongoose.Schema({
     maxLength: 100,
     required: true
   },
-  date: {
-    type: Date,
-    required: true
+  active:{
+    type:Boolean,
+    default:true
   },
-  content: {
-    type: String,
-    required: true
-  }
-
+  bulletins:[
+    {
+      type: String,
+      user:{
+          type: "ObjectId",
+          ref: "bulletins"
+      }
+    } 
+  ]
 })
 
 const model = mongoose.model('trials', trialSchema)
