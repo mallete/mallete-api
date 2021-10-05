@@ -51,10 +51,21 @@ const userSchema = new mongoose.Schema({
   paymentDay: {
     type: Date,
     required: false
-  }
+  },
 
 })
-
+/*
+  trials:[
+    {
+      trialId
+    }
+  ],
+  payment:{
+    active,
+    payload,
+    
+  }
+*/
 const model = mongoose.model('users', userSchema)
 
 module.exports = model

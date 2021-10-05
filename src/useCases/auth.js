@@ -8,7 +8,10 @@ async function login (email, password) {
   const validPassword = await bcrypt.compare(password, userFound.password)
   if (!validPassword) throw new Error('Verifica email y/o contraseña')
   // token
-  return jwt.sign({ id: userFound._id })
+  const token = jwt.sign({ id: userFound._id })
+  // console.log(userFound._id)
+  return { userId: userFound._id, token: token }
+  // return jwt.sign({ id: userFound._id })
 }
 
 module.exports = {

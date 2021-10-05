@@ -1,8 +1,8 @@
 const express = require('express')
-const users = require('../useCases/users')
+// const users = require('../useCases/users')
 const router = express.Router()
-const verifyAuth = require('../middlewares/auth')
-
+// const verifyAuth = require('../middlewares/auth')
+/*
 // Create User
 router.post('/', verifyAuth, async (request, response) => {
   try {
@@ -109,5 +109,5 @@ router.delete('/:id', verifyAuth, async (request, response) => {
     })
   }
 })
-
+*/
 module.exports = router

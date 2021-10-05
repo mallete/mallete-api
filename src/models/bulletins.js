@@ -14,45 +14,45 @@ const mongoose = require('mongoose')
     secretary: 'LIC. MARIA ISABEL DE ANDA MUÑOZ'
  */
 const trialBulletin = new mongoose.Schema({
-    record: {
-        type: String,
-        required: true
-    },
-    plaintiff: {
-        type: String,
-        required: true
-    },
-    defendant: {
-        type: String,
-        required: true
-    },
-    thirdParty: {
-        type: String
-    },
-    rawContent: {
-        type: String
-    },
-    viewMoreUrl: {
-        type: String
-    },
-    created: {
-        type: Date,
-        required: true
-    },
-    agreementDate: {
-        type: String,
-    },
-    agreementDateFormated: {
-        type: Date
-    },
-    publicationDate:{
-        type:String
-    },
-    publicationDateFormated:{
-        type: Date
-    }
+  record: {
+    type: String,
+    required: true
+  },
+  plaintiff: {
+    type: String,
+    required: true
+  },
+  defendant: {
+    type: String,
+    required: true
+  },
+  thirdParty: {
+    type: String
+  },
+  rawContent: {
+    type: String
+  },
+  viewMoreUrl: {
+    type: String
+  },
+  created: {
+    type: Date,
+    required: true
+  },
+  agreementDate: {
+    type: String
+  },
+  agreementDateFormated: {
+    type: Date
+  },
+  publicationDate: {
+    type: String
+  },
+  publicationDateFormated: {
+    type: Date
+  }
 })
 
-const model = mongoose.model('trials', trialSchema)
+const model = mongoose.model('trials', trialBulletin)
 
 module.exports = model

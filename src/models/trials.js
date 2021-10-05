@@ -30,18 +30,18 @@ const trialSchema = new mongoose.Schema({
     maxLength: 100,
     required: true
   },
-  active:{
-    type:Boolean,
-    default:true
+  active: {
+    type: Boolean,
+    default: true
   },
-  bulletins:[
+  bulletins: [
     {
       type: String,
-      user:{
-          type: "ObjectId",
-          ref: "bulletins"
+      user: {
+        type: 'ObjectId',
+        ref: 'bulletins'
       }
-    } 
+    }
   ]
 })
 
