@@ -14,7 +14,7 @@ router.post('/', async (request, response) => {
       data: {
         users: userCreated
       }
-    })
+    })  
   } catch (error) {
     response.status(400)
     response.json({
@@ -44,7 +44,8 @@ router.get('/', verifyAuth, async (request, response) => {
     })
   }
 })
-// Get Users by Id
+
+// Get User by Id
 router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params

@@ -13,7 +13,7 @@ const mongoose = require('mongoose')
     viewMoreUrl: '',
     secretary: 'LIC. MARIA ISABEL DE ANDA MUÑOZ'
  */
-const trialBulletin = new mongoose.Schema({
+const bulletinSchema = new mongoose.Schema({
     record: {
         type: String,
         required: true
@@ -53,6 +53,6 @@ const trialBulletin = new mongoose.Schema({
     }
 })
 
-const model = mongoose.model('trials', trialSchema)
+const model = mongoose.model('bulletins', bulletinSchema)
 
 module.exports = model
