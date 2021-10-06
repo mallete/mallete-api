@@ -3,7 +3,7 @@ const users = require('../useCases/users')
 const router = express.Router()
 const verifyAuth = require('../middlewares/auth')
 
-// Create User
+// Create Trial
 router.post('/', verifyAuth, async (request, response) => {
   try {
     const trial = request.body
@@ -24,7 +24,9 @@ router.post('/', verifyAuth, async (request, response) => {
     })
   }
 })
-// Get All Users
+
+
+// Get All Trials
 router.get('/', verifyAuth, async (request, response) => {
   try {
     const allUsers = await users.getAll()
@@ -44,7 +46,7 @@ router.get('/', verifyAuth, async (request, response) => {
     })
   }
 })
-// Get Users by Id
+// Get Trial by Id
 router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params

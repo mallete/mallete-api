@@ -30,18 +30,50 @@ const trialSchema = new mongoose.Schema({
     maxLength: 100,
     required: true
   },
-  active:{
-    type:Boolean,
-    default:true
+  active: {
+    type: Boolean,
+    default: true
   },
-  bulletins:[
+  bulletins: [
     {
-      type: String,
-      user:{
-          type: "ObjectId",
-          ref: "bulletins"
+      record: {
+        type: String,
+        required: true
+      },
+      plaintiff: {
+          type: String,
+          required: true
+      },
+      defendant: {
+          type: String,
+          required: true
+      },
+      thirdParty: {
+          type: String
+      },
+      rawContent: {
+          type: String
+      },
+      viewMoreUrl: {
+          type: String
+      },
+      created: {
+          type: Date,
+          required: true
+      },
+      agreementDate: {
+          type: String,
+      },
+      agreementDateFormated: {
+          type: Date
+      },
+      publicationDate:{
+          type:String
+      },
+      publicationDateFormated:{
+          type: Date
       }
-    } 
+    }
   ]
 })
 

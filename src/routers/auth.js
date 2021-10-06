@@ -5,11 +5,12 @@ const router = express.Router()
 router.post('/login', async (request, response) => {
   try {
     const { email, password } = request.body
-    const token = await auths.login(email, password)
+    const { userId, token } = await auths.login(email, password)
     response.json({
       success: true,
       message: 'Usuario logueado',
       data: {
+        userId,
         token
       }
     })

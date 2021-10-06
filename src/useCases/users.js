@@ -9,20 +9,20 @@ async function create ({ firstName, lastName, email, password }) {
   return User.create({ firstName, lastName, email, password: encryptedPassword })
 }
 
-function getAll () {
-  return User.find()
+async function getAll () {
+  return await User.find()
 }
 
-function getById (id) {
-  return User.findById(id)
+async function getById (id) {
+  return await User.findById(id)
 }
 
-function updateById (id, newData) {
-  return User.findByIdAndUpdate(id, newData, { new: true })
+async function updateById (id, newData) {
+  return await User.findByIdAndUpdate(id, newData, { new: true })
 }
 
-function deleteById (id) {
-  return User.findByIdAndDelete(id)
+async function deleteById (id) {
+  return await User.findByIdAndDelete(id)
 }
 
 module.exports = {
