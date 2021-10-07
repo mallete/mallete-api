@@ -34,6 +34,9 @@ const trialSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  deparmentCode:{
+    type:String
+  },
   bulletins: [
     {
       record: {
@@ -50,16 +53,6 @@ const trialSchema = new mongoose.Schema({
       },
       thirdParty: {
           type: String
-      },
-      rawContent: {
-          type: String
-      },
-      viewMoreUrl: {
-          type: String
-      },
-      created: {
-          type: Date,
-          required: true
       },
       agreementDate: {
           type: String,

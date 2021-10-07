@@ -35,10 +35,6 @@ const bulletinSchema = new mongoose.Schema({
     viewMoreUrl: {
         type: String
     },
-    created: {
-        type: Date,
-        required: true
-    },
     agreementDate: {
         type: String,
     },

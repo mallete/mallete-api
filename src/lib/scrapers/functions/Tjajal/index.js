@@ -151,12 +151,15 @@ async function scrapeRecord( { url, lastBulletin } ) {
     try {
         const baseUrl = new URL(url).origin
         const initialPayload = await scrapeUrl({ url })
+        //console.log({initialPayload})
         let newContent = { ...initialPayload };
 
             //clear the bulletin array to insert only the recent ones
             newContent = { ...newContent, bulletin:[]}
             
             const { bulletin: initialBulletin ,numberOfPages, params, token } = initialPayload
+            if(numberOfPages === 0)
+                return null;
             if(initialBulletin.length > 0 )
             {
                 const dateFormat = "DD-MM-YYYY"
@@ -174,7 +177,7 @@ async function scrapeRecord( { url, lastBulletin } ) {
                     else{
                         const pageParams = new URLSearchParams( { ...params, pagina: pageNumber } )
                         let url = `${baseUrl}/consulta.php?${pageParams.toString()}`
-                        console.log(url)
+                        //console.log(url)
                         const payload = await scrapeUrl( { url } )
                         const { bulletin } = payload
                         newBulletin = bulletin

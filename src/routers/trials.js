@@ -1,5 +1,5 @@
 const express = require('express')
-const users = require('../useCases/users')
+const trials = require('../useCases/trials')
 const router = express.Router()
 const verifyAuth = require('../middlewares/auth')
 
@@ -12,7 +12,7 @@ router.post('/', verifyAuth, async (request, response) => {
       success: true,
       message: 'The trial was inserted successfully',
       data: {
-        users: data
+        trial: data
       }
     })
   } catch (error) {
@@ -25,27 +25,54 @@ router.post('/', verifyAuth, async (request, response) => {
   }
 })
 
-
+// Get All Trials By Params
+router.get('/search', async (request, response) => {
+    try {
+        // Expediente: 1901/1912, platiff : "Bimbo", 
+        const { record, plantiff, id, deparmentCode = "tjajal" } = request.query;
+        //console.log(request)
+        console.log({ record, plantiff, id, deparmentCode })
+        const trialsRes = await trials.getByParams({ record, plantiff, id, deparmentCode })
+        response.json({
+        success: true,
+        message: 'Trial Found',
+            data: {
+                trials: trialsRes
+            }
+        })
+    } catch (error) {
+        response.status(400)
+        response.json({
+        success: false,
+        message: 'Ups! Algo salio mal, intenta de nuevo',
+        error: error.message
+        })
+    }
+})
+/*
 // Get All Trials
-router.get('/', verifyAuth, async (request, response) => {
-  try {
-    const allUsers = await users.getAll()
-    response.json({
-      success: true,
-      message: 'Estos son todos los usuarios',
-      data: {
-        users: allUsers
-      }
-    })
-  } catch (error) {
-    response.status(400)
-    response.json({
-      success: false,
-      message: 'Ups! Algo salio mal, intenta de nuevo',
-      error: error.message
-    })
-  }
-})
+router.get('/:id', verifyAuth, async (request, response) => {
+    try {
+      const allUsers = await users.getAll()
+      response.json({
+        success: true,
+        message: 'Estos son todos los usuarios',
+        data: {
+          users: allUsers
+        }
+      })
+    } catch (error) {
+      response.status(400)
+      response.json({
+        success: false,
+        message: 'Ups! Algo salio mal, intenta de nuevo',
+        error: error.message
+      })
+    }
+  })
+  // /trials/search
+  //Params 
+
 // Get Trial by Id
 router.get('/:id', async (request, response) => {
   try {
@@ -67,7 +94,7 @@ router.get('/:id', async (request, response) => {
       error: error.message
     })
   }
-})
+})*/
 // Update Users by Id
 router.patch('/:id', verifyAuth, async (request, response) => {
   try {
