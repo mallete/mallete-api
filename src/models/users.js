@@ -32,12 +32,8 @@ const userSchema = new mongoose.Schema({
   },
   plan: {
     type: String,
-    enum: ['Prueba', 'Standard', 'Gold'],
+    enum: ['basico', 'profesional', 'profesionalplus'],
     required: false
-  },
-  created: {
-    type: Date,
-    default: Date.now
   },
   rol: {
     type: Number,
@@ -52,19 +48,29 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: false
   },
-
-})
-/*
-  trials:[
-    {
-      trialId
-    }
-  ],
-  payment:{
-    active,
-    payload,
+  paymentHistory:[
     
+  ],
+  created: {
+    type: Date,
+    default: Date.now
   }
+})
+
+
+/*
+
+  PATCH /:id
+
+  {
+    plan: "",
+    vigencyDate: Date.now + 30 hace con moment,
+    paymentDay: moment(),
+    $push:{
+      paymentHistory:  [{paypalPaymentObject}]
+    }
+  }
+
 */
 const model = mongoose.model('users', userSchema)
 

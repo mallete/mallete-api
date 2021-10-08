@@ -18,3 +18,5 @@ server.use('/users', usersRouter)
 server.use('/auth', authRouter)
 server.use('/trials', trialsRouter)
 module.exports = server
+
+

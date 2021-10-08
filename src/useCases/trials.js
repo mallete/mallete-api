@@ -2,8 +2,8 @@ const Trial = require('../models/trials')
 const bcrypt = require('../lib/bcrypt')
 const moment = require('moment');
 const scraper = require('../lib/scrapers/functions/Tjajal')
+
 async function create ({ trial }) {
-    console.log("trial",trial)
     const trialFound = await Trial.findOne({ record: trial.record })
     if (trialFound) {
         const newData= {
