@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   },
   plan: {
     type: String,
-    enum: ['basico', 'profesional', 'profesionalplus'],
+    enum: ['basic', 'professional', 'professionalplus'],
     required: false
   },
   rol: {
