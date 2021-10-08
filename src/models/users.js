@@ -48,9 +48,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: false
   },
-  paymentHistory:[
-    
-  ],
+  paymentHistory:[{}],
   created: {
     type: Date,
     default: Date.now
