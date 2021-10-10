@@ -18,14 +18,16 @@ const activeTrialSchema = new mongoose.Schema({
     active: Boolean,
     trial: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'trials'
+        ref: 'trials',
+        required: true
     },
     user:{
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'users'
+        ref: 'users',
+        required: true
     }
 })
 
-const model = mongoose.model('activeTrials', activeTrialSchema)
+const model = mongoose.model('activetrials', activeTrialSchema)
 
 module.exports = model

@@ -3,6 +3,8 @@ const users = require('../useCases/users')
 const router = express.Router()
 const verifyAuth = require('../middlewares/auth')
 
+
+
 // Create User
 router.post('/', async (request, response) => {
   try {
@@ -24,6 +26,13 @@ router.post('/', async (request, response) => {
     })
   }
 })
+
+/**
+ * @swagger
+ * /users:
+ *    get:
+ *      description: This should return all users
+ */
 // Get All Users
 router.get('/', verifyAuth, async (request, response) => {
   try {

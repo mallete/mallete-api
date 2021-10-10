@@ -1,114 +1,141 @@
 const express = require('express')
-const users = require('../useCases/activeTrials')
+const activeTrials = require('../useCases/activeTrials')
 const router = express.Router()
 const verifyAuth = require('../middlewares/auth')
 
 // Create Active Trial
 router.post('/', async (request, response) => {
-  try {
-    const userData = request.body
-    const userCreated = await users.create(userData)
-    response.json({
-      success: true,
-      message: 'Regisro creado exitosamente',
-      data: {
-        users: userCreated
-      }
-    })  
-  } catch (error) {
-    response.status(400)
-    response.json({
-      success: false,
-      message: 'Ups! Algo salio mal, intenta de nuevo',
-      error: error.message
-    })
-  }
+    try {
+        const data = request.body
+        const reponseData = await activeTrials.create({ activeTrial: data })
+        response.json({
+            success: true,
+            message: 'Regisro creado exitosamente',
+            data: {
+                activeTrials: reponseData
+            }
+        })
+    } catch (error) {
+        response.status(400)
+        response.json({
+            success: false,
+            message: 'Ups! Algo salio mal, intenta de nuevo',
+            error: error.message
+        })
+    }
 })
-// Get Active Trials
+// Get All Active Trials
+/*
 router.get('/', verifyAuth, async (request, response) => {
-  try {
-    const allUsers = await users.getAll()
-    response.json({
-      success: true,
-      message: 'Estos son todos los usuarios',
-      data: {
-        users: allUsers
-      }
-    })
-  } catch (error) {
-    response.status(400)
-    response.json({
-      success: false,
-      message: 'Ups! Algo salio mal, intenta de nuevo',
-      error: error.message
-    })
-  }
+    try {
+        const responseData = await activeTrials.getAll()
+        response.json({
+            success: true,
+            message: 'Estos son todos los active trials',
+            data: {
+                activeTrials: responseData
+            }
+        })
+    } catch (error) {
+        response.status(400)
+        response.json({
+            success: false,
+            message: 'Ups! Algo salio mal, intenta de nuevo',
+            error: error.message
+        })
+    }
+})*/
+// Get All Active Trials and Filter
+router.get('/', verifyAuth, async (request, response) => {
+    try {
+        const { record, active, trial, user } = request.query;
+        let options = {}
+        if(record) options = {...options,record}
+        if(active) options = {...options,active:Boolean(active)}
+        if(trial) options = {...options,trial}
+        if(user) options = {...options,user}
+        const responseData = await activeTrials.getAllByParams({options})
+        console.log(responseData.length)
+        response.json({
+            success: true,
+            message: 'Estos son todos los active trials',
+            data: {
+                activeTrials: responseData
+            }
+        })
+    } catch (error) {
+        response.status(400)
+        response.json({
+            success: false,
+            message: 'Ups! Algo salio mal, intenta de nuevo',
+            error: error.message
+        })
+    }
 })
-
 // Get User by Id
 router.get('/:id', async (request, response) => {
-  try {
-    const { id } = request.params
-    const getById = await users.getById(id)
+    try {
+        const { id } = request.params
+        const responseData = await activeTrials.getById({ id })
 
-    response.json({
-      success: true,
-      message: 'Usuario encontrado',
-      data: {
-        users: getById
-      }
-    })
-  } catch (error) {
-    response.status(400)
-    response.json({
-      sucess: false,
-      message: 'Ups! Algo salio mal, intenta de nuevo',
-      error: error.message
-    })
-  }
+        response.json({
+            success: true,
+            message: 'Active Trial encontrado',
+            data: {
+                activeTrials: responseData
+            }
+        })
+    } catch (error) {
+        response.status(400)
+        response.json({
+            sucess: false,
+            message: 'Ups! Algo salio mal, intenta de nuevo',
+            error: error.message
+        })
+    }
 })
-// Update Users by Id
+// Update Active Trial by Id
 router.patch('/:id', verifyAuth, async (request, response) => {
-  try {
-    const { id } = request.params
-    const { body: userData } = request
-    const userUpdated = await users.updateById(id, userData)
-    response.json({
-      success: true,
-      message: 'Tus datos han sido actualizado correctamente',
-      data: {
-        users: userUpdated
-      }
-    })
-  } catch (error) {
-    response.status(400)
-    response.json({
-      sucess: false,
-      message: 'Ups! Algo salio mal, intenta de nuevo',
-      error: error.message
-    })
-  }
+    try {
+        const { id } = request.params
+        const { body: data } = request
+        const documentUpdated = await activeTrials.updateById({ id, newData: data })
+        response.json({
+            success: true,
+            message: 'The data was updated succesfully',
+            data: {
+                activeTrials: documentUpdated
+            }
+        })
+    } catch (error) {
+        response.status(400)
+        response.json({
+            sucess: false,
+            message: 'Ups! Algo salio mal, intenta de nuevo',
+            error: error.message
+        })
+    }
 })
-// Delete Users by Id
+// Delete Active Trial  by Id
 router.delete('/:id', verifyAuth, async (request, response) => {
-  try {
-    const { id } = request.params
-    const userDeleted = await users.deleteById(id)
-    response.json({
-      success: true,
-      message: 'Perfil Eliminado',
-      data: {
-        users: userDeleted
-      }
-    })
-  } catch (error) {
-    response.status(400)
-    response.json({
-      sucess: false,
-      message: 'Ups! Algo salio mal, intenta de nuevo',
-      error: error.message
-    })
-  }
+    try {
+        const { id } = request.params
+        const documentDeleted = await activeTrials.deleteById({ id })
+        response.json({
+            success: true,
+            message: 'Document Eliminado',
+            data: {
+                activeTrials: documentDeleted
+            }
+        })
+    } catch (error) {
+        response.status(400)
+        response.json({
+            sucess: false,
+            message: 'Ups! Algo salio mal, intenta de nuevo',
+            error: error.message
+        })
+    }
 })
 
 module.exports = router

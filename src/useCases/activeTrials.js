@@ -1,16 +1,18 @@
 const activeTrials = require("../models/activeTrials")
-const { updateById } = require("./trials")
 
-async function create({ ativeTrial }){
-    return activeTrials.create(ativeTrial)
+async function create({ activeTrial }){
+    return await activeTrials.create(activeTrial)
 }
 async function getAll(){
-    return await activeTrials.find()
+    return await activeTrials.find().populate("user").populate("trial")
+}
+async function getAllByParams({options}){
+    return await activeTrials.find({...options}).populate("user").populate("trial")
 }
 async function getById({id}){
-    return await activeTrials.findById(id)
+    return await activeTrials.findById(id).populate("user").populate("trial")
 }
-async function updateById(){
+async function updateById({id,newData}){
     return await activeTrials.findByIdAndUpdate(id, newData, { new: true })
 }
 async function deleteById({id}){
@@ -21,6 +23,7 @@ async function deleteById({id}){
 module.exports = {
     create,
     getAll,
+    getAllByParams,
     getById,
     updateById,
     deleteById
