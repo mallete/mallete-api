@@ -14,9 +14,8 @@ const mongoose = require('mongoose')
     secretary: 'LIC. MARIA ISABEL DE ANDA MUÑOZ'
  */
 const activeTrialSchema = new mongoose.Schema({
-    active:{
-        type: Boolean,
-    },
+    record: String,
+    active: Boolean,
     trial: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'trials'

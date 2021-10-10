@@ -7,7 +7,7 @@ const verifyAuth = require('../middlewares/auth')
 router.post('/', verifyAuth, async (request, response) => {
   try {
     const trial = request.body
-    const userCreated = await users.create(userData)
+    const trialCreated = await trials.create(userData)
     response.json({
       success: true,
       message: 'The trial was inserted successfully',
@@ -32,12 +32,12 @@ router.get('/search', async (request, response) => {
         const { record, plantiff, id, deparmentCode = "tjajal" } = request.query;
         //console.log(request)
         console.log({ record, plantiff, id, deparmentCode })
-        const trialsRes = await trials.getByParams({ record, plantiff, id, deparmentCode })
+        const trialsResponse = await trials.getByParams({ record, plantiff, id, deparmentCode })
         response.json({
         success: true,
         message: 'Trial Found',
             data: {
-                trials: trialsRes
+                trials: trialsResponse
             }
         })
     } catch (error) {
