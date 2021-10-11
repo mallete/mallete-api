@@ -83,7 +83,7 @@ router.get('/:id', async (request, response) => {
             success: true,
             message: 'Active Trial encontrado',
             data: {
-                activeTrials: responseData
+                activeTrial: responseData
             }
         })
     } catch (error) {
