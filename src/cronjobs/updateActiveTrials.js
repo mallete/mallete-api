@@ -13,13 +13,26 @@ const task = cron.schedule(expression, async function() {
     try {
         const currentActiveTrials = await activeTrials.getAllByParams({active:true})
         
-        console.log(currentActiveTrials)
-        console.log('running a task every minute');
+        currentActiveTrials.forEach((item,index)=>{
+            const timeout = getRandomInt(1,50)
+            console.log({timeout})
+        })
+        //console.log(currentActiveTrials)
+        //console.log('running a task every minute');
     } catch (error) {
         console.log(error)
     }
 });
 
+const randomTriggerFunction = async (url, timeout)=>{
+    setTimeout(()=>{    
 
+    },timeout)
+}
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
 module.exports = task
 

@@ -45,13 +45,14 @@ router.get('/', verifyAuth, async (request, response) => {
         })
     }
 })*/
+
 // Get All Active Trials and Filter
 router.get('/', verifyAuth, async (request, response) => {
     try {
         const { record, active, trial, user } = request.query;
         let options = {}
         if(record) options = {...options,record}
-        if(active) options = {...options,active:Boolean(active)}
+        if(active !== undefined) options = {...options, active: (active === "true") }
         if(trial) options = {...options,trial}
         if(user) options = {...options,user}
         const responseData = await activeTrials.getAllByParams({options})
