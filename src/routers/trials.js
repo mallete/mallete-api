@@ -117,6 +117,7 @@ router.patch('/:id', verifyAuth, async (request, response) => {
     })
   }
 })
+
 // Delete Users by Id
 router.delete('/:id', verifyAuth, async (request, response) => {
   try {

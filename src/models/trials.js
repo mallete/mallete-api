@@ -77,7 +77,11 @@ const trialSchema = new mongoose.Schema({
         type: String
       }
     }
-  ]
+  ],
+  created: {
+    type: Date,
+    default: Date.now
+  }
 })
 
 const model = mongoose.model('trials', trialSchema)

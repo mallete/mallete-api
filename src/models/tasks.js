@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const taskSchema = new mongoose.Schema({
   activeTrial: {
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'trials',
+    ref: 'activeTrials',
     required: true
   },
   record: {

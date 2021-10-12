@@ -14,7 +14,7 @@ const task = cron.schedule(expression, async function() {
         const currentActiveTrials = await activeTrials.getAllByParams({active:true})
         
         currentActiveTrials.forEach((item,index)=>{
-            const timeout = getRandomInt(1,50)
+            const timeout = getRandomInt(1,1500)
             console.log({timeout})
         })
         //console.log(currentActiveTrials)

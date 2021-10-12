@@ -30,7 +30,10 @@ const activeTrialSchema = new mongoose.Schema({
         ref: 'users',
         required: true
     },
-    
+    created: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 const model = mongoose.model('activetrials', activeTrialSchema)

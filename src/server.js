@@ -7,6 +7,7 @@ const usersRouter = require('./routers/users')
 const authRouter = require('./routers/auth')
 const trialsRouter = require('./routers/trials')
 const activeTrialsRouter = require('./routers/activeTrials')
+const tasksRouter = require('./routers/tasks')
 const cors = require('cors')
 
 
@@ -49,6 +50,7 @@ server.use('/users', usersRouter)
 server.use('/auth', authRouter)
 server.use('/trials', trialsRouter)
 server.use('/active-trials', activeTrialsRouter)
+server.use('/tasks', tasksRouter)
 server.use( "/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 module.exports = server
 
