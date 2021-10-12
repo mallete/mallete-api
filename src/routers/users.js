@@ -2,7 +2,8 @@ const express = require('express')
 const users = require('../useCases/users')
 const router = express.Router()
 const verifyAuth = require('../middlewares/auth')
-
+const sgMail = require('@sendgrid/mail')
+const { SENDGRID_API_KEY } = process.env
 
 
 // Create User
@@ -10,13 +11,36 @@ router.post('/', async (request, response) => {
   try {
     const userData = request.body
     const userCreated = await users.create(userData)
-    response.json({
-      success: true,
-      message: 'Regisro creado exitosamente',
-      data: {
-        users: userCreated
+
+    sgMail.setApiKey(SENDGRID_API_KEY)
+    const msg = {
+      to: userCreated.email, // Change to your recipient
+      from: 'no-reply@mallete.io', // Change to your verified sender 1a2b53b9287447cbad621603b6b639c6
+      templateId: 'd-1a2b53b9287447cbad621603b6b639c6',
+      dynamic_template_data: {
+        first_name: userCreated.firstName,
       }
-    })  
+    }
+
+    //Send Email
+    sgMail
+      .send(msg)
+      .then((response) => {
+        console.log(response[0].statusCode)
+        console.log(response[0].headers)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+
+    response.json({
+        success: true,
+        message: 'Regisro creado exitosamente',
+        data: {
+          users: userCreated
+        }
+      })
+
   } catch (error) {
     response.status(400)
     response.json({

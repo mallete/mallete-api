@@ -15,7 +15,10 @@ const mongoose = require('mongoose')
  */
 const activeTrialSchema = new mongoose.Schema({
     record: String,
-    active: Boolean,
+    active: {
+        type:Boolean, 
+        default: true
+    },
     updated: {
         type:Boolean, 
         default: true

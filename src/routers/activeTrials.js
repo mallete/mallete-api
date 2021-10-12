@@ -25,29 +25,9 @@ router.post('/', async (request, response) => {
     }
 })
 // Get All Active Trials
-/*
-router.get('/', verifyAuth, async (request, response) => {
-    try {
-        const responseData = await activeTrials.getAll()
-        response.json({
-            success: true,
-            message: 'Estos son todos los active trials',
-            data: {
-                activeTrials: responseData
-            }
-        })
-    } catch (error) {
-        response.status(400)
-        response.json({
-            success: false,
-            message: 'Ups! Algo salio mal, intenta de nuevo',
-            error: error.message
-        })
-    }
-})*/
 
 // Get All Active Trials and Filter
-router.get('/', verifyAuth, async (request, response) => {
+router.get('/', async (request, response) => {
     try {
         const { record, active, trial, user } = request.query;
         let options = {}
