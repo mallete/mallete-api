@@ -15,7 +15,7 @@ router.post('/', async (request, response) => {
     sgMail.setApiKey(SENDGRID_API_KEY)
     const msg = {
       to: userCreated.email, // Change to your recipient
-      from: 'no-reply@mallete.io', // Change to your verified sender 1a2b53b9287447cbad621603b6b639c6
+      from: 'no-reply@mallete.io', // Change to your verified sender
       templateId: 'd-1a2b53b9287447cbad621603b6b639c6',
       dynamic_template_data: {
         first_name: userCreated.firstName,
