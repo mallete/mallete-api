@@ -65,6 +65,16 @@ const trialSchema = new mongoose.Schema({
       },
       publicationDateFormated:{
           type: Date
+      },
+      room: {
+        type: String,
+        required: true
+      },
+      rawContent: {
+        type: String
+      },
+      viewMoreUrl: {
+        type: String
       }
     }
   ]

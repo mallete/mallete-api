@@ -16,6 +16,10 @@ const mongoose = require('mongoose')
 const activeTrialSchema = new mongoose.Schema({
     record: String,
     active: Boolean,
+    updated: {
+        type:Boolean, 
+        default: true
+    },
     trial: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'trials',
@@ -25,7 +29,8 @@ const activeTrialSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'users',
         required: true
-    }
+    },
+    
 })
 
 const model = mongoose.model('activetrials', activeTrialSchema)

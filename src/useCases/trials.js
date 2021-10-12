@@ -30,8 +30,11 @@ async function getByParams({ record = "", plantiff = "", deparmentCode= "tjajal"
     const encondedPlantiff = encodeURIComponent(plantiff) 
     const url = `https://portal.tjajal.org/consulta.php?fecha=&exp=${encondedRecord}&actor=${encondedPlantiff}&demandado=&terceros=&cc=Boletin`
     const scrapedPage = await scraper.scrapeRecord({url, lastBulletin})
+    console.log({scrapedPage})
     if(!scrapedPage)
         throw new Error('Record not found')
+    //if(scrapedPage.bulletins.length === 0)
+    //    return trialFound;
     const generatedTrial =  await generateTrial({ scrapedPage, deparmentCode})
     
     return await create({ trial: generatedTrial })

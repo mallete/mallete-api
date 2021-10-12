@@ -3,15 +3,13 @@ const mongoose = require('mongoose')
 // Schema
 
 const taskSchema = new mongoose.Schema({
-  userId: {
-    type: 'ObjectId',
-    ref: '',
+  activeTrial: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'trials',
     required: true
   },
-  numFile: {
-    type: Number,
-    min: 0,
-    max: 20,
+  record: {
+    type: String,
     required: true
   },
   title: {
@@ -20,6 +18,9 @@ const taskSchema = new mongoose.Schema({
     maxLength: 100,
     required: true
   },
+  assignee: {
+    type: String,
+  },
   limitDate: {
     type: Date,
     required: true
@@ -27,8 +28,11 @@ const taskSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true
+  },
+  created: {
+    type: Date,
+    default: Date.now
   }
-
 })
 
 const model = mongoose.model('tasks', taskSchema)
