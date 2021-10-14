@@ -23,7 +23,7 @@ async function getByParams({ record = "", plantiff = "", deparmentCode= "tjajal"
         if( oldTrial && oldTrial.bulletins && oldTrial.bulletins.length > 0)
         lastBulletin = oldTrial.bulletins[oldTrial.bulletins.length-1]
     }
-    const trialFound = await Trial.findOne({ record: record })
+    let trialFound = await Trial.findOne({ record: record })
     if(trialFound)
         lastBulletin = trialFound.bulletins[trialFound.bulletins.length-1]
     const encondedRecord = encodeURIComponent(record)
@@ -33,8 +33,14 @@ async function getByParams({ record = "", plantiff = "", deparmentCode= "tjajal"
     console.log({scrapedPage})
     if(!scrapedPage)
         throw new Error('Record not found')
-    //if(scrapedPage.bulletins.length === 0)
-    //    return trialFound;
+    if(scrapedPage.bulletin.length === 0){
+        return trialFound
+        /*.lean()
+        .exec((err, trialFound) => {
+          trialFound
+            return done(err, buildung);
+        }); */
+    }
     const generatedTrial =  await generateTrial({ scrapedPage, deparmentCode})
     
     return await create({ trial: generatedTrial })

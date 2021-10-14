@@ -20,14 +20,10 @@ const trialSchema = new mongoose.Schema({
   },
   plaintiff: {
     type: String,
-    minLength: 2,
-    maxLength: 100,
     required: true
   },
   defendant: {
     type: String,
-    minLength: 2,
-    maxLength: 100,
     required: true
   },
   active: {

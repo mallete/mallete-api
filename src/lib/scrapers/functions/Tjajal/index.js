@@ -60,7 +60,7 @@ function mapData({ data, url }){
         const longerTextIndex= item.rawContent.indexOf("...")
         if(longerTextIndex>=0) {
             const anchorTemplate = `<a href='${url}' target='_blank'>ver mas</a>`
-            //item.rawContent.slice(0, longerTextIndex).concat(encodeURI(anchorTemplate))
+            item.rawContent.slice(0, longerTextIndex).concat(encodeURI(anchorTemplate))
             item  = {...item, viewMoreUrl: url, viewMoreButton: anchorTemplate }
         }
         return item

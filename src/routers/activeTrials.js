@@ -12,7 +12,7 @@ router.post('/', async (request, response) => {
             success: true,
             message: 'Regisro creado exitosamente',
             data: {
-                activeTrials: reponseData
+                activeTrial: reponseData
             }
         })
     } catch (error) {

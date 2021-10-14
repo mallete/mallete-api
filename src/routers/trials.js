@@ -24,7 +24,9 @@ router.post('/', verifyAuth, async (request, response) => {
     })
   }
 })
-
+function isEmpty(value){
+  return (value == null || value.length === 0);
+}
 // Get All Trials By Params
 router.get('/search', async (request, response) => {
     try {
@@ -32,6 +34,8 @@ router.get('/search', async (request, response) => {
         const { record, plantiff, id, deparmentCode = "tjajal" } = request.query;
         //console.log(request)
         console.log({ record, plantiff, id, deparmentCode })
+        if(isEmpty(record) && isEmpty(plantiff) && isEmpty(id))
+          throw new Error("Please provide a search param")
         const trialsResponse = await trials.getByParams({ record, plantiff, id, deparmentCode })
         response.json({
         success: true,
