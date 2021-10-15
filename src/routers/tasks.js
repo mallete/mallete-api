@@ -93,17 +93,17 @@ router.get('/:id', async (request, response) => {
         })
     }
 })
-// Update task by Id
+// Update Taks by Id
 router.patch('/:id', verifyAuth, async (request, response) => {
   try {
     const { id } = request.params
     const { body: newdata } = request
-    const userUpdated = await users.updateById({id, newdata})
+    const taskUpdated = await tasks.updateById({id, newdata})
     response.json({
       success: true,
       message: 'Tus datos han sido actualizado correctamente',
       data: {
-        users: userUpdated
+        task: taskUpdated
       }
     })
   } catch (error) {
@@ -115,11 +115,11 @@ router.patch('/:id', verifyAuth, async (request, response) => {
     })
   }
 })
-// Delete Users by Id
+// Delete Task by Id
 router.delete('/:id', verifyAuth, async (request, response) => {
   try {
     const { id } = request.params
-    const responseData = await users.deleteById({ id })
+    const responseData = await tasks.deleteById({ id })
     response.json({
       success: true,
       message: 'Task Deleted',

@@ -3,6 +3,11 @@ const mongoose = require('mongoose')
 // Schema
 
 const taskSchema = new mongoose.Schema({
+    bulletin: {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'bulletins',
+      required: true
+  },
   activeTrial: {
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'activeTrials',
