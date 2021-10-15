@@ -12,7 +12,9 @@ async function getAllByParams({options}){
 async function getById({id}){
     return await activeTrials.findById(id).populate("user").populate("trial")
 }
-async function updateById({id,newData}){
+async function updateById({id,newData,populateData}){
+    if(populateData)
+        return  await activeTrials.findByIdAndUpdate(id, newData, { new: true }).populate("user").populate("trial")
     return await activeTrials.findByIdAndUpdate(id, newData, { new: true })
 }
 async function deleteById({id}){

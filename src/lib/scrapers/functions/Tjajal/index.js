@@ -196,7 +196,7 @@ async function scrapeRecord( { url, lastBulletin } ) {
                     }
                 }
             }
-        console.log( newContent.bulletin.length)
+        //console.log( newContent.bulletin.length)
         return newContent
         
     } catch (error) {
